@@ -1,0 +1,14 @@
+name: Deploy Frontend
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker login -u ${mrinal1729} -p ${mrinal1729}
+      - run: docker build -t misramrinal/react-test -f Dockerfile.dev .
+      - run: docker run -e CI=true misramrinal/react-test npm test
